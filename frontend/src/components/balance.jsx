@@ -1,16 +1,17 @@
 import axios from "axios";
 import {useState , useEffect} from "react"
 
-function Balance()
+function Balance({Mpin})
 {
     const [balance,setbalance ] = useState(0);
-    const [firstName,setFirstName] = useState("");
     const token = sessionStorage.getItem('token');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:4000/api/v1/account/balance" , {
+                const response = await axios.get("http://localhost:4000/api/v1/account/balance" ,{
+                    Mpin : Mpin
+                }, {
                     headers : {
                         Authorization : `Bearer ${token}`,
                     },
@@ -25,34 +26,10 @@ function Balance()
         }
     }, [token])
 
-    useEffect(()=>{
-        async function fun()
-        {
-            try
-            {
-                const response = await axios.get("http://localhost:3000/api/v1/user/info",{
-                    headers:{
-                        Authorization : `Bearer ${token}`
-                    }
-                })
-                setFirstName(response.data.firstName)
-            }catch(err){
-                console.log("Error in Fetching name",err);
-            }
-        }
-        if(token)
-        {
-            fun();
-        }
-    },[token]
-    )
-
-    return <div>
-        <div className="font-bold text-black text-lg">
-            Hi {firstName} Your Balance is : 
-        </div>
-        <div className=" font-semibold mt-5 text-black  text-4xl">
-            {balance}
+    return <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm justify-center flex justify-center rounded-xl">
+        <div className="flex flex-col p-4 w-1/3 justify-center items-center">
+            <div className="text-white text-5xl">Your Balance Is -:</div>
+            <div className="text-white text-4xl">{balance}</div>
         </div>
     </div>
 }

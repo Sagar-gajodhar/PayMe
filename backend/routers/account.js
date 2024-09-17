@@ -4,11 +4,18 @@ const authmiddleware = require("../Middlewares/autherization")
 const {account} = require("../db")
 const router = express.Router();
 
+
 router.get("/balance",authmiddleware,async function(req,res){
     try{
         const acc = await account.findOne({UserId : req.userId})
         if(!acc){
             return res.status(404).json({message:"No accound Found", id:req.userId})
+        }
+        else if(acc.Mpin != req.body.Mpin)
+        {
+            return res.status(411).json({
+                message : "Please Enter Valid Mpin"
+            })
         }
         return res.status(200).json({balance : acc.balance})
     }

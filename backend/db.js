@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { string } = require("zod");
 mongoose.connect("mongodb+srv://sagarrathore52204:Sagar%402004@cluster0.dcvzzpc.mongodb.net/").then(()=>{
     console.log("Connected To dataBase");
 })
@@ -21,6 +22,10 @@ const account_schema = new mongoose.Schema({
     balance : {
         type : Number,
         required : true
+    },
+    Mpin : {
+        type : String,
+        require : true
     }
 })
 

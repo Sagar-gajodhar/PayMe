@@ -28,7 +28,7 @@ function User()
     }, [token,filter] )
 
 
-    return <div className="p-4 bg-white shadow-md rounded-lg w-full max-w-md mx-auto">
+    return <div className="p-4 bg-white shadow-md rounded-lg w-2/3 mx-auto">
         <div className="text-2xl font-bold text-gray-800 mb-4">
             User
         </div>
@@ -47,7 +47,7 @@ function User_bar({user})
 {
     const navigate = useNavigate();
     return (
-        <div className="flex items-center justify-between p-4 bg-white shadow-md rounded-lg max-w-lg mx-auto">
+        <div className="flex items-center justify-between p-4 bg-white  rounded-lg w-full mx-auto">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 flex items-center justify-center text-xl font-semibold text-white bg-black rounded-full">
               {user.firstName[0]}

@@ -11,10 +11,12 @@ const signup_schema = zod.object({
     username : zod.string(),
     password : zod.string(),
     firstName : zod.string(),
-    lastName : zod.string()
+    lastName : zod.string(),
+    Mpin : zod.string().min(4)
 })
 router.post("/signup",async function(req,res){
 
+    const body = req.body
     const {success} = signup_schema.safeParse(req.body);
     if(!success)
     {
@@ -32,11 +34,17 @@ router.post("/signup",async function(req,res){
 
     try
     {
-        const user = await User.create(req.body);
+        const user = await User.create({
+            username : body.username,
+            password : body.password,
+            firstName : body.firstName,
+            lastName : body.lastName
+        });
 
         await account.create({
             UserId : user._id,
-            balance : 10000
+            balance : 10000,
+            Mpin : body.Mpin
         })
     
         const token = jwt.sign({
