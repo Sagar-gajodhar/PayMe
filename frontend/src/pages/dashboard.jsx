@@ -1,6 +1,5 @@
 import App_bar from "../components/app_bar";
 import Balance from "../components/balance";
-import { Popup } from "../components/popup";
 import User from "../components/user";
 
 function Dashboard()

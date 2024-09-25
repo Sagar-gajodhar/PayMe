@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Popup } from "./popup";
+import {Popup} from "./popup"
 
 function App_bar() {
 
@@ -11,10 +11,6 @@ function App_bar() {
     const token = sessionStorage.getItem('token')
     const navigate = useNavigate();
 
-    function clickHandler()
-    {
-      setshowMode(true)
-    }
 
 
     useEffect(function (){
@@ -40,12 +36,11 @@ function App_bar() {
 
     return (
       <div className="flex justify-between items-center bg-black p-4 shadow-md">
-        {showModel && <Popup onClose={()=>{setshowMode(false)}}/>}
         <div className="flex items-center space-x-4">
           <div className="text-white text-2xl font-bold">
             PayMe
           </div>
-          <button onClick={clickHandler}
+          <button onClick={()=>{setshowMode(true)}}
            className="text-white bg-blue-500 hover:bg-blue-600 rounded-lg px-4 py-2 font-semibold focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300">
             Check Balance
           </button> 
@@ -60,6 +55,8 @@ function App_bar() {
             Logout
           </button>
         </div>
+        {/* <Popup onclose={()=>{setshowMode(false)}}/> */}
+        {showModel && <Popup fun={()=>{setshowMode(false)}}/>}
       </div>
     );
   }
